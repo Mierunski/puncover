@@ -357,6 +357,8 @@ class Collector:
         if caller != callee:
             if not callee in caller[CALLEES]:
                 caller[CALLEES].append(callee)
+            if CALLERS not in callee:
+                callee[CALLERS] = []
             if not caller in callee[CALLERS]:
                 callee[CALLERS].append(caller)
                 caller_file = caller.get("file", None)

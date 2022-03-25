@@ -62,7 +62,14 @@ def main():
 
     if args.debug:
         app.debug = True
-    app.run(host=args.host, port=args.port)
+    portrange = 10
+    c_port = args.port
+    while (portrange > 0):
+        try:
+            app.run(host=args.host, port=c_port)
+        except OSError:
+            c_port += 1
+            portrange -= 1
 
 
 if __name__ == '__main__':

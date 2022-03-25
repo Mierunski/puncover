@@ -32,12 +32,16 @@ class BacktraceHelper():
 
         visited = [f] + (visited if visited else [])
         result = (0, [])
-
-        for c in f[list_attribute]:
-            if c not in visited:
-                candidate = self.deepest_call_tree(c, list_attribute, cache_attribute, visited)
-                if candidate[0] > result[0]:
-                    result = candidate
+        # print("dupa")
+        # if collector.CALLEES not in f[list_attribute]:
+        #     # print(f[list_attribute])
+        #     f[list_attribute][collector.CALLEES] = []
+        if list_attribute in f:
+            for c in f[list_attribute]:
+                if c not in visited:
+                    candidate = self.deepest_call_tree(c, list_attribute, cache_attribute, visited)
+                    if candidate[0] > result[0]:
+                        result = candidate
 
 
         result = (result[0] + f.get(collector.STACK_SIZE, 0), [f] + result[1])
